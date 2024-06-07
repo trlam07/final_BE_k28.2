@@ -10,7 +10,6 @@ const generateAccessToken = (user) => {
 
 const register = async(req, res) => {
     const {email, password} = req.body;
-    console.log({email, password});
     if(!email || !password) {
         handleResponseError(res, 400, 'Bad request: All fields are required.')
         return;
@@ -24,10 +23,8 @@ const register = async(req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRound)
     try {
         const data = await User.create({email, password: hashedPassword})
-        console.log('data', data)
         handleResponseSuccess(res, 201, 'Register successfully', {email: data.email, role: data.role})
     } catch (error) {
-        console.log('error', error)
         handleResponseError(res, 500, 'Internal Server Error')
     }
 };

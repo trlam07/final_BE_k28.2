@@ -7,7 +7,6 @@ const getMovies = async (req, res) => {
         const movies = await Movie.find()
         handleResponseSuccess(res, 200, 'Get movies successfully', {movies})
     } catch (error) {
-        console.log('error', error)
         handleResponseError(res, 500, 'Internal Server Error')
     }
 };
